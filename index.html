@@ -1,0 +1,677 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BogotaFitDeals | Reebok Rapid Strike</title>
+
+    <meta name="description"
+        content="Explora las Reebok Rapid Strike en realidad aumentada y descubre una recomendación especial de BogotaFitDeals.">
+
+    <script type="module"
+        src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080808;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* NAVBAR */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(8, 8, 8, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #ff2b9a;
+        }
+
+        .nav-link {
+            color: #dddddd;
+            font-size: 14px;
+            margin-left: 25px;
+        }
+
+        .nav-link:hover {
+            color: #ff2b9a;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+            padding: 130px 25px 70px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 650px;
+            height: 650px;
+            background: #ff2b9a;
+            opacity: 0.12;
+            filter: blur(120px);
+            border-radius: 50%;
+            right: -150px;
+            top: 100px;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .eyebrow {
+            color: #ff2b9a;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: clamp(45px, 7vw, 82px);
+            line-height: 0.95;
+            font-weight: 900;
+            letter-spacing: -3px;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: #ff2b9a;
+        }
+
+        .hero-description {
+            color: #bdbdbd;
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 560px;
+            margin-bottom: 35px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 24px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 14px;
+            transition: 0.25s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #ff2b9a;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255,43,154,0.3);
+        }
+
+        .btn-outline {
+            border: 1px solid #444;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            border-color: #ff2b9a;
+            color: #ff2b9a;
+        }
+
+        /* 3D */
+
+        .model-container {
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .model-glow {
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            background: #ff2b9a;
+            opacity: 0.09;
+            filter: blur(70px);
+            border-radius: 50%;
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 520px;
+            background: transparent;
+            --poster-color: transparent;
+            z-index: 2;
+        }
+
+        /* FEATURES */
+
+        section {
+            padding: 100px 25px;
+        }
+
+        .section-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            color: #999;
+            margin-bottom: 45px;
+            font-size: 17px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .feature {
+            background: #111;
+            border: 1px solid #242424;
+            border-radius: 18px;
+            padding: 28px;
+            transition: 0.25s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-6px);
+            border-color: #ff2b9a;
+        }
+
+        .feature-number {
+            color: #ff2b9a;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            margin-bottom: 12px;
+            font-size: 19px;
+        }
+
+        .feature p {
+            color: #999;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* AR BANNER */
+
+        .ar-section {
+            background: #101010;
+        }
+
+        .ar-box {
+            border: 1px solid #2b2b2b;
+            border-radius: 25px;
+            padding: 55px;
+            text-align: center;
+            background:
+                radial-gradient(circle at center, rgba(255,43,154,0.12), transparent 55%),
+                #111;
+        }
+
+        .ar-box h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .ar-box p {
+            color: #aaa;
+            max-width: 650px;
+            margin: 0 auto 30px;
+            line-height: 1.7;
+        }
+
+        /* PROMOTION */
+
+        .promotion {
+            background: #ff2b9a;
+            color: white;
+            border-radius: 25px;
+            padding: 55px;
+            text-align: center;
+        }
+
+        .promotion h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .promotion p {
+            max-width: 650px;
+            margin: auto auto 30px;
+            line-height: 1.7;
+        }
+
+        .promotion .btn {
+            background: white;
+            color: #111;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 55px 25px;
+            border-top: 1px solid #222;
+            text-align: center;
+        }
+
+        footer h3 {
+            margin-bottom: 12px;
+        }
+
+        footer p {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .social {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .social a:hover {
+            color: #ff2b9a;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 850px) {
+
+            .nav-link {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+
+            .model-container {
+                min-height: 380px;
+            }
+
+            model-viewer {
+                height: 380px;
+            }
+
+            .features {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .ar-box,
+            .promotion {
+                padding: 35px 20px;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            h1 {
+                font-size: 50px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title,
+            .ar-box h2,
+            .promotion h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <div class="logo">
+            BOGOTA<span>FIT</span>DEALS
+        </div>
+
+        <div>
+            <a href="#producto" class="nav-link">Producto</a>
+            <a href="#ar" class="nav-link">Realidad aumentada</a>
+            <a href="#promocion" class="nav-link">Promoción</a>
+        </div>
+    </nav>
+</header>
+
+<main>
+
+    <!-- HERO -->
+
+    <section class="hero" id="producto">
+
+        <div class="hero-content">
+
+            <div>
+
+                <div class="eyebrow">
+                    BogotaFitDeals
+                </div>
+
+                <h1>
+                    Reebok<br>
+                    <span>Rapid Strike</span>
+                </h1>
+
+                <p class="hero-description">
+                    Descubre el producto. Explora sus características.
+                    Encuentra tu próxima recomendación.
+                </p>
+
+                <div class="buttons">
+
+                    <a
+                        href="https://player.onirix.com/exp/eBVYyP"
+                        target="_blank"
+                        class="btn btn-primary">
+                        🥽 Ver en mi espacio
+                    </a>
+
+                    <a
+                        href="#caracteristicas"
+                        class="btn btn-outline">
+                        Explorar producto
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="model-container">
+
+                <div class="model-glow"></div>
+
+                <model-viewer
+                    src="assets/reebok_left_shoe.glb"
+                    camera-controls
+                    auto-rotate
+                    rotation-per-second="25deg"
+                    shadow-intensity="1"
+                    exposure="1"
+                    alt="Reebok Men’s Rapid Strike Shoes">
+
+                </model-viewer>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+
+    <section id="caracteristicas">
+
+        <div class="section-container">
+
+            <div class="eyebrow">
+                CONOCE EL PRODUCTO
+            </div>
+
+            <h2 class="section-title">
+                Diseñado para moverte.
+            </h2>
+
+            <p class="section-subtitle">
+                Explora algunas de las características de las Reebok Rapid Strike.
+            </p>
+
+            <div class="features">
+
+                <div class="feature">
+                    <div class="feature-number">01</div>
+                    <h3>Diseño deportivo</h3>
+                    <p>
+                        Una propuesta pensada para complementar
+                        diferentes actividades y estilos.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-number">02</div>
+                    <h3>Uso versátil</h3>
+                    <p>
+                        Ideal para caminatas, entrenamiento,
+                        gimnasio y uso diario.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-number">03</div>
+                    <h3>Exploración 3D</h3>
+                    <p>
+                        Observa el producto desde diferentes
+                        ángulos directamente desde tu navegador.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <div class="feature-number">04</div>
+                    <h3>Realidad aumentada</h3>
+                    <p>
+                        Proyecta el producto sobre una superficie
+                        real utilizando tu teléfono.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- AR -->
+
+    <section class="ar-section" id="ar">
+
+        <div class="section-container">
+
+            <div class="ar-box">
+
+                <div class="eyebrow">
+                    EXPERIENCIA WEBAR
+                </div>
+
+                <h2>
+                    Pruébalas en tu espacio.
+                </h2>
+
+                <p>
+                    Escanea, explora y descubre las Reebok Rapid Strike
+                    mediante realidad aumentada. No necesitas instalar
+                    una aplicación.
+                </p>
+
+                <a
+                    href="https://player.onirix.com/exp/eBVYyP"
+                    target="_blank"
+                    class="btn btn-primary">
+                    🥽 Ver en mi espacio
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROMOTION -->
+
+    <section id="promocion">
+
+        <div class="section-container">
+
+            <div class="promotion">
+
+                <div class="eyebrow">
+                    BOGOTAFITDEALS
+                </div>
+
+                <h2>
+                    Descubre una recomendación especial.
+                </h2>
+
+                <p>
+                    Explora el producto en realidad aumentada y encuentra
+                    una recomendación pensada para ti.
+                </p>
+
+                <!--
+                    IMPORTANTE:
+                    Reemplazar el enlace siguiente por el mismo
+                    enlace de afiliado que configuraste en Onirix.
+                -->
+
+                <a
+                    href="https://www.amazon.com/dp/B0G5BZKZWX"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn">
+                    🛒 Comprar ahora
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>BOGOTAFITDEALS</h3>
+
+    <p>
+        Marketing de afiliados, recomendaciones y experiencias
+        digitales para descubrir nuevos productos.
+    </p>
+
+    <div class="social">
+
+        <a href="#" target="_blank">
+            Instagram
+        </a>
+
+        <a href="#" target="_blank">
+            Facebook
+        </a>
+
+        <a href="#" target="_blank">
+            WhatsApp
+        </a>
+
+    </div>
+
+    <p style="margin-top:25px;">
+        © 2026 BogotaFitDeals. Todos los derechos reservados.
+    </p>
+
+</footer>
+
+</body>
+</html>
+```
